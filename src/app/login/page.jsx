@@ -26,7 +26,7 @@ export default function Login() {
             localStorage.setItem('token', token);
             setError(null);
             setSuccess('Login realizado com sucesso!');
-            router.push('/home');
+            router.push('/agendamentos');
         } catch (error) {
             const errorMessage = error.response?.data?.message || 'Erro ao fazer login. Tente novamente.';
             setError(errorMessage);

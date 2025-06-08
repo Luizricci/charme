@@ -1,0 +1,16 @@
+.container {
+    padding: 20px;
+    background-color: #f7f5fb;
+    min-height: 100vh;
+}
+
+.title {
+    color: #a47be0;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.text {
+    color: #6B7280;
+    font-size: 16px;
+}

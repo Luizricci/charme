@@ -4,3 +4,45 @@
   box-sizing: border-box;
   font-family: var(--font), sans-serif,   Arial, Helvetica, sans-serif;
 }
+
+.sider {
+  background: #f7f5fb;
+  border-right: 1px solid #eee;
+}
+
+.logo {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: #a47be0;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.menu {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: #6B7280;
+}
+
+.header {
+  background: #fff;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid #eee;
+}
+
+.content {
+  background: #faf9fc;
+  min-height: calc(100vh - 64px);
+}
+
+.innerContent {
+  padding: 32px 40px;
+}
