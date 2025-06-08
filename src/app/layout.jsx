@@ -25,31 +25,37 @@ export default function RootLayout({ children }) {
     onClick: () => router.push(item.path),
   }));
 
+  const isLoginPage = pathname === '/login';
+
   return (
     <html lang="pt-br">
       <body>
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sider width={240} className="sider">
-            <div className="logo">
-              <span style={{ marginRight: 8 }}>🌸</span>SALÃO DE BELEZA
-            </div>
-            <Menu
-              mode="inline"
-              selectedKeys={[pathname]}
-              items={menuItemsWithClick}
-              className="menu"
-            />
-          </Sider>
-          <Layout>
-            <Header className="header">
-              <Avatar src="https://randomuser.me/api/portraits/women/44.jpg" />
-              <span style={{ marginLeft: 12, fontWeight: 500 }}>Mariana</span>
-            </Header>
-            <Content className="content">
-              <div className="innerContent">{children}</div>
-            </Content>
+        {isLoginPage ? (
+          children 
+        ) : (
+          <Layout style={{ minHeight: '100vh' }}>
+            <Sider width={240} className="sider">
+              <div className="logo">
+                <span style={{ marginRight: 8 }}>🌸</span>SALÃO DE BELEZA
+              </div>
+              <Menu
+                mode="inline"
+                selectedKeys={[pathname]}
+                items={menuItemsWithClick}
+                className="menu"
+              />
+            </Sider>
+            <Layout>
+              <Header className="header">
+                <Avatar src="https://randomuser.me/api/portraits/women/44.jpg" />
+                <span style={{ marginLeft: 12, fontWeight: 500 }}>Mariana</span>
+              </Header>
+              <Content className="content">
+                <div className="innerContent">{children}</div>
+              </Content>
+            </Layout>
           </Layout>
-        </Layout>
+        )}
       </body>
     </html>
   );
