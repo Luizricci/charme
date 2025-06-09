@@ -5,6 +5,15 @@
   font-family: var(--font), sans-serif,   Arial, Helvetica, sans-serif;
 }
 
+html, body {
+  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
 .sider {
   background: #f7f5fb;
   border-right: 1px solid #eee;
@@ -38,10 +47,6 @@
   border-bottom: 1px solid #eee;
 }
 
-.content {
-  background: #faf9fc;
-  min-height: calc(100vh - 64px);
-}
 
 .innerContent {
   padding: 32px 40px;

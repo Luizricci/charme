@@ -11,8 +11,8 @@ const { Header, Content, Sider } = Layout;
 const menuItems = [
   { icon: <AppstoreOutlined />, label: 'Dashboard', path: '/dashboard' },
   { icon: <CalendarOutlined />, label: 'Agendamentos', path: '/agendamentos' },
-  { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
   { icon: <VideoCameraOutlined />, label: 'Serviços', path: '/servicos' },
+  { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
 ];
 
 export default function RootLayout({ children }) {
@@ -46,10 +46,6 @@ export default function RootLayout({ children }) {
               />
             </Sider>
             <Layout>
-              <Header className="header">
-                <Avatar src="https://randomuser.me/api/portraits/women/44.jpg" />
-                <span style={{ marginLeft: 12, fontWeight: 500 }}>Mariana</span>
-              </Header>
               <Content className="content">
                 <div className="innerContent">{children}</div>
               </Content>
