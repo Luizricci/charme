@@ -9,7 +9,7 @@ import styles from './configuracoes.module.css';
 
 export default function Configuracoes() {
     const router = useRouter();
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editNumero, setEditNumero] = useState('');
@@ -90,8 +90,8 @@ export default function Configuracoes() {
                 />
                 <div className={styles.profileInfo}>
                     <p><strong>Nome:</strong> {user.name}</p>
-                    <p><strong>Número:</strong> {user.numero}</p>
-                    <p><strong>Endereço:</strong> {user.endereco}</p>
+                    <p><strong>Número:</strong> {user.phone}</p>
+                    <p><strong>Endereço:</strong> {user.address}</p>
                 </div>
                 <IoPencil className={styles.iconPencil} onClick={openEditModal} />
             </div>
