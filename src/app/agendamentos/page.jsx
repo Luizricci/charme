@@ -3,7 +3,7 @@ import styles from './agendamento.module.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { Card } from 'antd'; 
+import { Card, Empty } from 'antd';
 
 export default function Agendamentos() {
     const [agendamentos, setAgendamentos] = useState([]);
@@ -25,7 +25,7 @@ export default function Agendamentos() {
                             Authorization: `Bearer ${token}`,
                         },
                     });
-                    setAgendamentos(response.data);
+                    setAgendamentos(response.data); 
                 } else {
                     throw new Error('Usuário não autenticado');
                 }
@@ -44,34 +44,50 @@ export default function Agendamentos() {
     }
 
     if (error) {
-        return <p>{error}</p>;
+        return (
+            <div className={styles.container}>
+                <Empty
+                    description={error}
+                    image={Empty.PRESENTED_IMAGE_SIMPLE}
+                    style={{ margin: '40px auto' }}
+                />
+            </div>
+        );
     }
 
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Agendamentos</h1>
             <div className={styles.cardsContainer}>
-                {agendamentos.map((ag, idx) => {
-                    const date = ag.data ? new Date(ag.data) : null;
-                    const time = ag.hora ? new Date(`1970-01-01T${ag.hora}`) : null;
+                {agendamentos.length === 0 ? (
+                    <Empty
+                        description="Nenhum agendamento encontrado"
+                        image={Empty.PRESENTED_IMAGE_SIMPLE}
+                        style={{ margin: '40px auto' }}
+                    />
+                ) : (
+                    agendamentos.map((ag, idx) => {
+                        const date = ag.data ? new Date(ag.data) : null;
+                        const time = ag.hora ? new Date(`1970-01-01T${ag.hora}`) : null;
 
-                    const formattedDate = date ? date.toLocaleDateString('pt-BR') : 'Data inválida';
-                    const formattedTime = time ? time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'Hora inválida';
+                        const formattedDate = date ? date.toLocaleDateString('pt-BR') : 'Data inválida';
+                        const formattedTime = time ? time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'Hora inválida';
 
-                    return (
-                        <Card
-                            key={idx}
-                            className={styles.card}
-                            styles={{ body: { padding: 20 } }}
-                        >
-                            <div className={styles.servico}>{ag.servico_nome}</div>
-                            <div className={styles.info}>
-                                <b>{formattedTime} às {formattedDate}</b>
-                                <span className={styles.profissional}>{ag.profissional_nome}</span>
-                            </div>
-                        </Card>
-                    );
-                })}
+                        return (
+                            <Card
+                                key={idx}
+                                className={styles.card}
+                                styles={{ body: { padding: 20 } }}
+                            >
+                                <div className={styles.servico}>{ag.servico_nome}</div>
+                                <div className={styles.info}>
+                                    <b>{formattedTime} às {formattedDate}</b>
+                                    <span className={styles.profissional}>{ag.profissional_nome}</span>
+                                </div>
+                            </Card>
+                        );
+                    })
+                )}
             </div>
         </div>
     );
