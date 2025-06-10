@@ -1,16 +1,38 @@
-.container {
-    padding: 20px;
-    background-color: #f7f5fb;
-    min-height: 100vh;
-}
-
 .title {
-    color: #a47be0;
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #1F2937;
 }
 
-.text {
-    color: #6B7280;
-    font-size: 16px;
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.card {
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px #e6e6e6;
+    max-width: 400px;
+}
+
+.nome {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.servico {
+    color: #a47be0;
+    font-weight: 500;
+}
+
+.info {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.profissional {
+    color: #888;
+    margin-left: 0.5rem;
 }
