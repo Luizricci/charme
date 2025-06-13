@@ -20,7 +20,6 @@ export default function Agendamentos() {
     const [servicos, setServicos] = useState([]);
     const [profissionais, setProfissionais] = useState([]);
 
-    // Horários permitidos
     const horariosPermitidos = [
         "09:00:00", "10:00:00", "11:00:00", "12:00:00",
         "13:00:00", "14:00:00", "15:00:00", "16:00:00",
@@ -95,7 +94,7 @@ export default function Agendamentos() {
             const decoded = jwtDecode(token);
             const cliente_id = decoded.id;
             const dataFormatada = `${data.year()}-${data.month() + 1}-${data.date()}`;
-            const horaFormatada = hora; // já está no formato correto
+            const horaFormatada = hora;
 
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/agendamentos`, {
                 data: dataFormatada,
