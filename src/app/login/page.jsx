@@ -11,6 +11,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+    const [isRequesting, setIsRequesting] = useState(false);
     const router = useRouter();
 
     const handleLogin = async () => {
@@ -23,7 +24,10 @@ export default function Login() {
             if (!token) {
                 throw new Error('Token não encontrado na resposta');
             }
+            console.log('requisição');
             localStorage.setItem('token', token);
+            
+            setIsRequesting(true);
             setError(null);
             setSuccess('Login realizado com sucesso!');
             router.push('/agendamentos');
@@ -31,6 +35,8 @@ export default function Login() {
             const errorMessage = error.response?.data?.message || 'Erro ao fazer login. Tente novamente.';
             setError(errorMessage);
             setSuccess(null);
+        } finally {
+            setIsRequesting(false);
         }
     };
 
@@ -57,7 +63,7 @@ export default function Login() {
                     />
                     {error && <p className={styles.error}>{error}</p>}
                     {success && <p className={styles.success}>{success}</p>}
-                    <button onClick={handleLogin} className={styles.button}>Login</button>
+                    <button onClick={handleLogin} className={styles.button} disabled={email=== '' || password.length < 1 || isRequesting}>Login</button>
                 </div>
             </div>
         </div>
