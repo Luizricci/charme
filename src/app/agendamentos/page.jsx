@@ -3,7 +3,7 @@ import styles from './agendamento.module.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { Card, Empty, Modal, DatePicker, Button, TimePicker, Select, ConfigProvider } from 'antd';
+import { Card, Empty, Modal, DatePicker, Button, Select, ConfigProvider } from 'antd';
 import ptBR from 'antd/locale/pt_BR';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +19,13 @@ export default function Agendamentos() {
     const [profissional, setProfissional] = useState('');
     const [servicos, setServicos] = useState([]);
     const [profissionais, setProfissionais] = useState([]);
+
+    // Horários permitidos
+    const horariosPermitidos = [
+        "09:00:00", "10:00:00", "11:00:00", "12:00:00",
+        "13:00:00", "14:00:00", "15:00:00", "16:00:00",
+        "17:00:00", "18:00:00", "19:00:00"
+    ];
 
     useEffect(() => {
         const fetchAgendamentos = async () => {
@@ -88,7 +95,8 @@ export default function Agendamentos() {
             const decoded = jwtDecode(token);
             const cliente_id = decoded.id;
             const dataFormatada = `${data.year()}-${data.month() + 1}-${data.date()}`;
-            const horaFormatada = hora.format('HH:mm:ss');
+            const horaFormatada = hora; // já está no formato correto
+
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/agendamentos`, {
                 data: dataFormatada,
                 hora: horaFormatada,
@@ -230,12 +238,18 @@ export default function Agendamentos() {
                     </div>
                     <div style={{ marginBottom: 16 }}>
                         <label>Hora:</label>
-                        <TimePicker
-                            value={hora}
-                            onChange={setHora}
-                            style={{ width: '100%' }}
-                            format="HH:mm"
-                        />
+                        <div className={styles.horariosGrid}>
+                            {horariosPermitidos.map(horario => (
+                                <button
+                                    key={horario}
+                                    type="button"
+                                    className={`${styles.horarioBtn} ${hora === horario ? styles.selected : ''}`}
+                                    onClick={() => setHora(horario)}
+                                >
+                                    {horario.slice(0, 5)}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                     <div>
                         <label>Profissional:</label>
@@ -245,8 +259,7 @@ export default function Agendamentos() {
                             placeholder="Selecione o profissional"
                             options={profissionais
                                 .filter(p => p.tipo === 'profissional')
-                                .map(p => ({ label: p.name, value: p.id }))
-                            }
+                                .map(p => ({ label: p.name, value: p.id }))}
                             style={{ width: '100%' }}
                         />
                     </div>
