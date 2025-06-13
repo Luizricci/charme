@@ -36,3 +36,33 @@
     color: #888;
     margin-left: 0.5rem;
 }
+.ant-input, .ant-picker, .ant-select-selector {
+  border-radius: 6px !important;
+  font-size: 1rem;
+}
+
+.ant-modal-title {
+  font-weight: 700;
+  color: #22223b;
+  letter-spacing: 1px;
+}
+
+.ant-modal-content {
+  border-radius: 12px;
+  padding: 32px 24px 24px 24px;
+}
+
+.ant-modal-footer .ant-btn-primary {
+  background: linear-gradient(90deg, #e63946 60%, #ff758f 100%);
+  border: none;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.ant-modal-footer .ant-btn-primary:hover {
+  background: linear-gradient(90deg, #c9184a 60%, #ff758f 100%);
+}
+
+.ant-modal-footer .ant-btn-default {
+  border-radius: 6px;
+}
