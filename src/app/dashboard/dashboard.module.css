@@ -1,38 +1,136 @@
-.title {
-    font-weight: 700;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: #1F2937;
-}
-
 .cardsContainer {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
 }
 
-.card {
-    border-radius: 1rem;
+.userCardsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 3rem;
+    justify-content: center;
+}
+
+.userCard {
+    min-width: 260px;
+    max-width: 320px;
+    border-radius: 14px !important;
     box-shadow: 0 2px 8px #e6e6e6;
-    max-width: 400px;
+    border: none !important;
+    background: #f7f5fb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.nome {
+.userInfo {
+    margin-bottom: 18px;
+}
+
+.userName {
+    font-size: 1.1rem;
     font-weight: 600;
-    font-size: 1.125rem;
+    color: #4a4e69;
+    margin-bottom: 6px;
 }
 
-.servico {
-    color: #a47be0;
-    font-weight: 500;
-}
-
-.info {
-    margin-top: 0.5rem;
+.userEmail {
     font-size: 1rem;
+    color: #7c7c7c;
 }
 
-.profissional {
-    color: #888;
-    margin-left: 0.5rem;
+.userActions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.editButton {
+    background: linear-gradient(90deg, #a47be0 60%, #7c3aed 100%);
+    border: none;
+    font-weight: 600;
+    border-radius: 6px;
+    color: #fff;
+    transition: background 0.2s;
+}
+
+.editButton:hover {
+    background: linear-gradient(90deg, #7c3aed 60%, #a47be0 100%);
+    color: #fff;
+}
+
+.deleteButton {
+    background: #fff0f3;
+    color: #c9184a;
+    border: 1.5px solid #c9184a;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.deleteButton:hover {
+    background: #c9184a;
+    color: #fff;
+}
+
+.userType {
+    font-size: 1rem;
+    color: #7c7c7c;
+}
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 8px 0;
+}
+
+.modalLabel {
+  font-weight: 600;
+  color: #4a4e69;
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.modalSelect .ant-select-selector {
+  border-radius: 8px !important;
+  min-height: 38px;
+  font-size: 1rem;
+  background: #f7f5fb;
+  border: 1.5px solid #a47be0 !important;
+  color: #4a4e69 !important;
+  font-weight: 600;
+  transition: border 0.2s;
+}
+
+.modalSelect .ant-select-selector:focus,
+.modalSelect .ant-select-selector:hover {
+  border-color: #7c3aed !important;
+}
+
+.ant-modal-content {
+  border-radius: 14px;
+  padding: 32px 24px 24px 24px;
+}
+
+.ant-modal-title {
+  font-weight: 700;
+  color: #22223b;
+  letter-spacing: 1px;
+}
+
+.saveButton {
+  background: linear-gradient(90deg, #a47be0 60%, #7c3aed 100%) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 8px !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: background 0.2s;
+}
+
+.saveButton:hover,
+.saveButton:focus {
+  background: linear-gradient(90deg, #7c3aed 60%, #a47be0 100%) !important;
+  color: #fff !important;
 }

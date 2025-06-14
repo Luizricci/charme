@@ -16,6 +16,7 @@ export default function Login() {
 
     const handleLogin = async () => {
         try {
+            setIsRequesting(true);
             const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
                 email,
                 password,
@@ -27,7 +28,7 @@ export default function Login() {
             console.log('requisição');
             localStorage.setItem('token', token);
             
-            setIsRequesting(true);
+            
             setError(null);
             setSuccess('Login realizado com sucesso!');
             router.push('/agendamentos');
