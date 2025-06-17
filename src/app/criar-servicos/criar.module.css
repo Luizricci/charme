@@ -60,6 +60,16 @@
     margin-top: 16px;
     box-shadow: 0 1px 6px rgba(124, 58, 237, 0.09);
   }
+  .pencil {
+    position: absolute;
+    background: transparent;
+    border: none;
+    top: 16px;
+    right: 16px;
+    color: #7c3aed;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
   
   @media (max-width: 700px) {
     .container {
