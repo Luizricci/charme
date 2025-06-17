@@ -12,7 +12,7 @@
   }
   
   .servicosList {
-    width: 100%;
+    max-width: 400px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 28px;

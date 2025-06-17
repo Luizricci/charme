@@ -7,14 +7,14 @@ import { useRouter, usePathname } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 import './globals.css';
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 const adminMenu = [
   { icon: <AppstoreOutlined />, label: 'Dashboard', path: '/dashboard' },
   { icon: <CalendarOutlined />, label: 'Agendamentos', path: '/agendamentos' },
   { icon: <VideoCameraOutlined />, label: 'Serviços', path: '/servicos' },
-  { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
   { icon: <PlusOutlined />, label: 'Criar Serviços', path: '/criar-servicos' },
+  { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
 ];
 
 const userMenu = [
