@@ -16,6 +16,12 @@ const adminMenu = [
   { icon: <PlusOutlined />, label: 'Criar Serviços', path: '/criar-servicos' },
   { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
 ];
+const profissionalMenu = [
+  { icon: <CalendarOutlined />, label: 'Agendamentos', path: '/agendamentos' },
+  { icon: <VideoCameraOutlined />, label: 'Serviços', path: '/servicos' },
+  { icon: <PlusOutlined />, label: 'Criar Serviços', path: '/criar-servicos' },
+  { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
+];
 
 const userMenu = [
   { icon: <CalendarOutlined />, label: 'Agendamentos', path: '/agendamentos' },
