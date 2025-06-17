@@ -1,0 +1,89 @@
+.container {
+    max-width: 630px;
+    margin: 48px auto 0 auto;
+    padding: 38px 28px 32px 28px;
+    background: linear-gradient(120deg, #f8fafc 60%, #f3e8ff 100%);
+    border-radius: 20px;
+    border: 1px solid #ede9fe;
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.07), 0 1.5px 8px rgba(146, 84, 222, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+
+.title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #7c3aed;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.label {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #6b21a8;
+    margin-bottom: 2px;
+}
+
+.form :global(.ant-input) {
+    padding: 11px 14px;
+    border: 1.5px solid #e9d5ff;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #fff;
+    transition: border 0.2s;
+}
+
+.form :global(.ant-input:focus) {
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 2px #ede9fe;
+}
+
+.submitButton,
+.form :global(.ant-btn) {
+    width: 100%;
+    background: linear-gradient(90deg, #a78bfa 0%, #7c3aed 100%);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 0;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.submitButton:hover,
+.form :global(.ant-btn:hover) {
+    background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.13);
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding: 18px 6px;
+        max-width: 98vw;
+    }
+
+    .title {
+        font-size: 1.4rem;
+    }
+}

@@ -89,10 +89,7 @@ export default function Dashboard() {
                   }}
                 >
                   Editar
-                </Button>
-                <Button danger className={styles.deleteButton}>
-                  Excluir
-                </Button>
+                </Button> 
               </div>
             </Card>
           ))

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CalendarOutlined, SettingOutlined, AppstoreOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { CalendarOutlined, SettingOutlined, AppstoreOutlined, VideoCameraOutlined, PlusOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { useRouter, usePathname } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
@@ -14,6 +14,7 @@ const adminMenu = [
   { icon: <CalendarOutlined />, label: 'Agendamentos', path: '/agendamentos' },
   { icon: <VideoCameraOutlined />, label: 'Serviços', path: '/servicos' },
   { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
+  { icon: <PlusOutlined />, label: 'Criar Serviços', path: '/criar-servicos' },
 ];
 
 const userMenu = [
