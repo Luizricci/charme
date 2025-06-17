@@ -1,16 +1,78 @@
 .container {
-    padding: 20px;
-    background-color: #f7f5fb;
-    min-height: 100vh;
-}
-
-.title {
-    color: #a47be0;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.text {
-    color: #6B7280;
-    font-size: 16px;
-}
+    max-width: 900px;
+  }
+  
+  .title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #7c3aed;
+    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+  
+  .servicosList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+  }
+  
+  .servicoCard {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(124, 58, 237, 0.08);
+    border: 1px solid #ede9fe;
+    padding: 22px 20px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: box-shadow 0.18s, transform 0.18s;
+  }
+  
+  .servicoCard:hover {
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.13);
+    transform: translateY(-2px) scale(1.01);
+  }
+  
+  .servicoTitle {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #7c3aed;
+    margin-bottom: 8px;
+  }
+  
+  .duracaoMinutos {
+    font-size: 1rem;
+    color: #6b21a8;
+    margin-bottom: 4px;
+  }
+  
+  .servicoPrice {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(90deg, #a78bfa 0%, #7c3aed 100%);
+    padding: 6px 16px;
+    border-radius: 8px;
+    align-self: flex-end;
+    margin-top: 12px;
+    box-shadow: 0 1px 4px rgba(124, 58, 237, 0.07);
+  }
+  
+  @media (max-width: 700px) {
+    .container {
+      padding: 10px 2px;
+      max-width: 98vw;
+    }
+    .title {
+      font-size: 1.3rem;
+    }
+    .servicosList {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .servicoCard {
+      padding: 14px 8px 12px 8px;
+    }
+  }
