@@ -9,60 +9,80 @@ import './globals.css';
 
 const { Content, Sider } = Layout;
 
-const adminMenu = [
-  { icon: <AppstoreOutlined />, label: 'Dashboard', path: '/dashboard' },
-  { icon: <CalendarOutlined />, label: 'Agendamentos', path: '/agendamentos' },
-  { icon: <VideoCameraOutlined />, label: 'Serviços', path: '/servicos' },
-  { icon: <PlusOutlined />, label: 'Criar Serviços', path: '/criar-servicos' },
-  { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
-];
-const profissionalMenu = [
-  { icon: <CalendarOutlined />, label: 'Agendamentos', path: '/agendamentos' },
-  { icon: <VideoCameraOutlined />, label: 'Serviços', path: '/servicos' },
-  { icon: <PlusOutlined />, label: 'Criar Serviços', path: '/criar-servicos' },
-  { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
+const allMenu = [
+  { icon: <AppstoreOutlined />, label: 'Dashboard', path: '/dashboard', allowed: ['admin'] },
+  { icon: <CalendarOutlined />, label: 'Agendamentos', path: '/agendamentos', allowed: ['admin', 'profissional', 'cliente'] },
+  { icon: <VideoCameraOutlined />, label: 'Serviços', path: '/servicos', allowed: ['admin', 'profissional', 'cliente'] },
+  { icon: <PlusOutlined />, label: 'Criar Serviços', path: '/criar-servicos', allowed: ['admin', 'profissional'] },
+  { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes', allowed: ['admin', 'profissional', 'cliente'] },
 ];
 
-const userMenu = [
-  { icon: <CalendarOutlined />, label: 'Agendamentos', path: '/agendamentos' },
-  { icon: <VideoCameraOutlined />, label: 'Serviços', path: '/servicos' },
-  { icon: <SettingOutlined />, label: 'Configurações', path: '/configuracoes' },
-];
+const allowedRoutes = {
+  admin: ['/dashboard', '/agendamentos', '/servicos', '/criar-servicos', '/configuracoes'],
+  profissional: ['/agendamentos', '/servicos', '/criar-servicos', '/configuracoes'],
+  cliente: ['/agendamentos', '/servicos', '/configuracoes'],
+};
 
 export default function RootLayout({ children }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [menuItems, setMenuItems] = useState([]);
+
   const [userType, setUserType] = useState(null);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        setUserType(decoded.tipo);
-        if (decoded.tipo === 'admin') {
-          setMenuItems(adminMenu);
-        } else {
-          setMenuItems(userMenu);
-        }
-      } catch (e) {
-        setMenuItems([]);
-        setUserType(null);
-      }
-    } else {
-      setMenuItems([]);
-      setUserType(null);
-    }
-  }, []);
-
-  const menuItemsWithClick = menuItems.map((item) => ({
-    ...item,
-    key: item.path,
-    onClick: () => router.push(item.path),
-  }));
+  const [loading, setLoading] = useState(true); 
 
   const isLoginPage = pathname === '/login';
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        setUserType(null);
+        setLoading(false);
+        if (!isLoginPage) {
+          router.replace('/login');
+        }
+        return;
+      }
+
+      try {
+        const decoded = jwtDecode(token);
+        const tipo = decoded?.tipo;
+
+        setUserType(tipo);
+
+
+        const permittedRoutes = allowedRoutes[tipo] || [];
+
+        if (!permittedRoutes.includes(pathname) && !isLoginPage) {
+          router.replace('/agendamentos');
+        }
+      } catch (err) {
+        console.error('Token inválido:', err);
+        localStorage.removeItem('token');
+        setUserType(null);
+        if (!isLoginPage) {
+          router.replace('/login');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [pathname, router]);
+
+  const menuItems = allMenu
+    .filter(item => userType && item.allowed.includes(userType))
+    .map(item => ({
+      ...item,
+      key: item.path,
+      onClick: () => router.push(item.path),
+    }));
+
+  if (loading && !isLoginPage) {
+    return <div style={{ padding: 20 }}>Carregando...</div>;
+  }
 
   return (
     <html lang="pt-br">
@@ -78,7 +98,7 @@ export default function RootLayout({ children }) {
               <Menu
                 mode="inline"
                 selectedKeys={[pathname]}
-                items={menuItemsWithClick}
+                items={menuItems}
                 className="menu"
               />
             </Sider>
