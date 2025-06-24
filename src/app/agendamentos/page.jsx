@@ -7,6 +7,7 @@ import { Card, Empty, Modal, DatePicker, Button, Select, ConfigProvider } from '
 import ptBR from 'antd/locale/pt_BR';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// vou fazer depois a alteração da página para a implementação do https://fullcalendar.io/ achei mais interessante 
 
 export default function Agendamentos() {
     const [agendamentos, setAgendamentos] = useState([]);
