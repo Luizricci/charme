@@ -105,3 +105,8 @@
     border-color: #eee;
     cursor: not-allowed;
 }
+.cardPast {
+    opacity: 0.5;
+    filter: grayscale(0.6);
+    background: #f3f3f3 !important;
+}

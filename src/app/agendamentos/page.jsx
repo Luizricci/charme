@@ -184,9 +184,23 @@ export default function Agendamentos() {
                             style={{ margin: '40px auto' }}
                         />
                     ) : (
-                        agendamentos.map((ag, idx) => {
+                        [...agendamentos].reverse().map((ag, idx) => {
                             const date = ag.data ? new Date(ag.data) : null;
                             const time = ag.hora ? new Date(`1970-01-01T${ag.hora}`) : null;
+
+                            let agDateTime = null;
+                            if (date && time) {
+                                agDateTime = new Date(
+                                    date.getFullYear(),
+                                    date.getMonth(),
+                                    date.getDate(),
+                                    time.getHours(),
+                                    time.getMinutes(),
+                                    time.getSeconds()
+                                );
+                            }
+                            const now = new Date();
+                            const isPast = agDateTime && agDateTime < now;
 
                             const formattedDate = date ? date.toLocaleDateString('pt-BR') : 'Data inválida';
                             const formattedTime = time ? time.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : 'Hora inválida';
@@ -194,7 +208,7 @@ export default function Agendamentos() {
                             return (
                                 <Card
                                     key={idx}
-                                    className={styles.card}
+                                    className={`${styles.card} ${isPast ? styles.cardPast : ''}`}
                                     styles={{ body: { padding: 20 } }}
                                 >
                                     <div className={styles.servico}>{ag.servico_nome}</div>
