@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { CalendarOutlined, SettingOutlined, AppstoreOutlined, VideoCameraOutlined, PlusOutlined } from '@ant-design/icons';
+import { CalendarOutlined, SettingOutlined, AppstoreOutlined, VideoCameraOutlined, PlusOutlined, MenuOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { useRouter, usePathname } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
@@ -28,13 +28,14 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
 
   const [userType, setUserType] = useState(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
+  const [siderOpen, setSiderOpen] = useState(false);
 
   const isLoginPage = pathname === '/login';
 
   useEffect(() => {
     const checkAuth = () => {
-      const token = localStorage.getItem('token');
+      const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
       if (!token) {
         setUserType(null);
@@ -51,7 +52,6 @@ export default function RootLayout({ children }) {
 
         setUserType(tipo);
 
-
         const permittedRoutes = allowedRoutes[tipo] || [];
 
         if (!permittedRoutes.includes(pathname) && !isLoginPage) {
@@ -59,7 +59,7 @@ export default function RootLayout({ children }) {
         }
       } catch (err) {
         console.error('Token inválido:', err);
-        localStorage.removeItem('token');
+        if (typeof window !== 'undefined') localStorage.removeItem('token');
         setUserType(null);
         if (!isLoginPage) {
           router.replace('/login');
@@ -70,7 +70,8 @@ export default function RootLayout({ children }) {
     };
 
     checkAuth();
-  }, [pathname, router]);
+    setSiderOpen(false); // Fecha menu ao navegar
+  }, [pathname, router, isLoginPage]);
 
   const menuItems = allMenu
     .filter(item => userType && item.allowed.includes(userType))
@@ -81,7 +82,13 @@ export default function RootLayout({ children }) {
     }));
 
   if (loading && !isLoginPage) {
-    return <div style={{ padding: 20 }}>Carregando...</div>;
+    return (
+      <html lang="pt-br">
+        <body>
+          <div style={{ padding: 20 }}>Carregando...</div>
+        </body>
+      </html>
+    );
   }
 
   return (
@@ -90,24 +97,47 @@ export default function RootLayout({ children }) {
         {isLoginPage ? (
           children
         ) : (
-          <Layout style={{ minHeight: '100vh' }}>
-            <Sider width={240} className="sider">
-              <div className="logo">
-                <span style={{ marginRight: 8 }}>🌸</span>SALÃO DE BELEZA
-              </div>
-              <Menu
-                mode="inline"
-                selectedKeys={[pathname]}
-                items={menuItems}
-                className="menu"
-              />
-            </Sider>
-            <Layout>
-              <Content className="content">
-                <div className="innerContent">{children}</div>
-              </Content>
+          <>
+            {/* Botão só aparece se o menu estiver fechado */}
+            {!siderOpen && (
+              <button
+                className="menu-toggle"
+                onClick={() => setSiderOpen(true)}
+                aria-label="Abrir menu"
+              >
+                <MenuOutlined />
+              </button>
+            )}
+            <Layout style={{ minHeight: '100vh' }}>
+              <Sider
+                width={240}
+                className={`sider${siderOpen ? ' open' : ''}`}
+                onClick={e => e.stopPropagation()} // Não fecha ao clicar dentro do menu
+              >
+                <div className="logo">
+                  <span style={{ marginRight: 8 }}>🌸</span>SALÃO DE BELEZA
+                </div>
+                <Menu
+                  mode="inline"
+                  selectedKeys={[pathname]}
+                  items={menuItems}
+                  className="menu"
+                />
+              </Sider>
+              {/* Backdrop para fechar ao clicar fora */}
+              {siderOpen && (
+                <div
+                  className="sider-backdrop"
+                  onClick={() => setSiderOpen(false)}
+                />
+              )}
+              <Layout>
+                <Content className="content">
+                  <div className="innerContent">{children}</div>
+                </Content>
+              </Layout>
             </Layout>
-          </Layout>
+          </>
         )}
       </body>
     </html>
