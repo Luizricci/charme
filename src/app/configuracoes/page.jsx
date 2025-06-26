@@ -81,7 +81,7 @@ export default function Configuracoes() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Configurações</h1>
+            <h1 className="page-title">Configurações</h1>
             <div className={styles.profileBox}>
                 <img
                     src={user.photo || "https://xsgames.co/randomusers/avatar.php?g=pixel"}

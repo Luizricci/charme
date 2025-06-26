@@ -27,7 +27,7 @@ export default function Servicos() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Serviços Disponíveis</h1>
+            <h1 className="page-title">Serviços Disponíveis</h1>
             <div className={styles.servicosList}>
                 {servicos.map((servico) => {
                     const precoFormatado = (servico.preco_cents / 100).toLocaleString('pt-BR', {

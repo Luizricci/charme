@@ -63,7 +63,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles.dashboardContainer}>
-      <h2 className={styles.dashboardTitle}>Painel de Administrador</h2>
+      <h1 className="page-title">Painel de Administrador</h1>
       <div className={styles.userCardsGrid}>
         {loading ? (
           <p className={styles.loadingText}>Carregando usuários...</p>

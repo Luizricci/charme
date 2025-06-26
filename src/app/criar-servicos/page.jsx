@@ -79,7 +79,7 @@ export default function CriarServicos() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Serviços</h1>
+      <h1 className="page-title">Criar Serviços</h1>
       <Button
         type="primary"
         className={styles.novoServicoBtn}

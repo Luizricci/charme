@@ -55,6 +55,17 @@ html, body {
   display: none;
 }
 
+.page-title, .title, h1 {
+  font-size: 2rem;
+  color: #22223b;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+  margin-top: 2rem;
+  text-align: center;
+  line-height: 1.2;
+}
+
 @media (max-width: 700px) {
   .menu-toggle {
     display: block;
