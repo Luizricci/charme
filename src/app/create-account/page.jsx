@@ -1,12 +1,12 @@
 "use client";
 
-import styles from './login.module.css';
-import axios from 'axios';
+import styles from './createAccount.module.css'; 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
-
-export default function Login() {
+export default function CreateAccount() {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -14,28 +14,22 @@ export default function Login() {
     const [isRequesting, setIsRequesting] = useState(false);
     const router = useRouter();
 
-    const handleLogin = async () => {
+    const handleCreateAccount = async (e) => {
+        e.preventDefault();
+        setError(null);
+        setSuccess(null);
+        setIsRequesting(true);
         try {
-            setIsRequesting(true);
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/`, {
+                name,
                 email,
                 password,
             });
-            const { token } = response.data;
-            if (!token) {
-                throw new Error('Token não encontrado na resposta');
-            }
-            console.log('requisição');
-            localStorage.setItem('token', token);
-
-
-            setError(null);
-            setSuccess('Login realizado com sucesso!');
-            router.push('/agendamentos');
+            setSuccess('Conta criada com sucesso! Faça login.');
+            setTimeout(() => router.push('/login'), 1500);
         } catch (error) {
-            const errorMessage = error.response?.data?.message || 'Erro ao fazer login. Tente novamente.';
+            const errorMessage = error.response?.data?.message || 'Erro ao criar conta. Tente novamente.';
             setError(errorMessage);
-            setSuccess(null);
         } finally {
             setIsRequesting(false);
         }
@@ -44,11 +38,21 @@ export default function Login() {
     return (
         <div className={styles.container}>
             <div className={styles.loginBox}>
-                <h1 className={styles.title}>Bem-vinda de volta!</h1>
-                <div className={styles.form}>
-                    <label htmlFor="username" className={styles.label}>E-mail</label>
+                <h1 className={styles.title}>Criar Conta</h1>
+                <form className={styles.form} onSubmit={handleCreateAccount}>
+                    <label htmlFor="name" className={styles.label}>Nome Completo</label>
                     <input
                         type="text"
+                        id="name"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        className={styles.input}
+                        required
+                    />
+                    <label htmlFor="email" className={styles.label}>E-mail</label>
+                    <input
+                        type="email"
+                        id="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         className={styles.input}
@@ -57,6 +61,7 @@ export default function Login() {
                     <label htmlFor="password" className={styles.label}>Senha</label>
                     <input
                         type="password"
+                        id="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         className={styles.input}
@@ -64,18 +69,24 @@ export default function Login() {
                     />
                     {error && <p className={styles.error}>{error}</p>}
                     {success && <p className={styles.success}>{success}</p>}
-                    <button onClick={handleLogin} className={styles.button} disabled={email === '' || password.length < 1 || isRequesting}>Login</button>
+                    <button
+                        type="submit"
+                        className={styles.button}
+                        disabled={isRequesting || !name || !email || !password}
+                    >
+                        Criar Conta
+                    </button>
                     <div className={styles.noAccount}>
-                        Não tem uma conta?
+                        Já tem uma conta?
                         <button
                             className={styles.createAccountBtn}
-                            onClick={() => router.push('/create-account')}
                             type="button"
+                            onClick={() => router.push('/login')}
                         >
-                            Crie agora
+                            Entrar
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );

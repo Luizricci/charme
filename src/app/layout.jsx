@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
   const [loading, setLoading] = useState(true);
   const [siderOpen, setSiderOpen] = useState(false);
 
-  const isLoginPage = pathname === '/login';
+  const isLoginOrCreateAccountPage = pathname === '/login' || pathname === '/create-account';
 
   useEffect(() => {
     const checkAuth = () => {
@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
       if (!token) {
         setUserType(null);
         setLoading(false);
-        if (!isLoginPage) {
+        if (!isLoginOrCreateAccountPage) {
           router.replace('/login');
         }
         return;
@@ -54,14 +54,14 @@ export default function RootLayout({ children }) {
 
         const permittedRoutes = allowedRoutes[tipo] || [];
 
-        if (!permittedRoutes.includes(pathname) && !isLoginPage) {
+        if (!permittedRoutes.includes(pathname) && !isLoginOrCreateAccountPage) {
           router.replace('/agendamentos');
         }
       } catch (err) {
         console.error('Token inválido:', err);
         if (typeof window !== 'undefined') localStorage.removeItem('token');
         setUserType(null);
-        if (!isLoginPage) {
+        if (!isLoginOrCreateAccountPage) {
           router.replace('/login');
         }
       } finally {
@@ -70,8 +70,8 @@ export default function RootLayout({ children }) {
     };
 
     checkAuth();
-    setSiderOpen(false); // Fecha menu ao navegar
-  }, [pathname, router, isLoginPage]);
+    setSiderOpen(false);
+  }, [pathname, router, isLoginOrCreateAccountPage]);
 
   const menuItems = allMenu
     .filter(item => userType && item.allowed.includes(userType))
@@ -81,7 +81,7 @@ export default function RootLayout({ children }) {
       onClick: () => router.push(item.path),
     }));
 
-  if (loading && !isLoginPage) {
+  if (loading && !isLoginOrCreateAccountPage) {
     return (
       <html lang="pt-br">
         <body>
@@ -94,11 +94,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
       <body>
-        {isLoginPage ? (
+        {isLoginOrCreateAccountPage ? (
           children
         ) : (
           <>
-            {/* Botão só aparece se o menu estiver fechado */}
             {!siderOpen && (
               <button
                 className="menu-toggle"
@@ -112,7 +111,7 @@ export default function RootLayout({ children }) {
               <Sider
                 width={240}
                 className={`sider${siderOpen ? ' open' : ''}`}
-                onClick={e => e.stopPropagation()} // Não fecha ao clicar dentro do menu
+                onClick={e => e.stopPropagation()}
               >
                 <div className="logo">
                   <span style={{ marginRight: 8 }}>🌸</span>SALÃO DE BELEZA
@@ -124,7 +123,6 @@ export default function RootLayout({ children }) {
                   className="menu"
                 />
               </Sider>
-              {/* Backdrop para fechar ao clicar fora */}
               {siderOpen && (
                 <div
                   className="sider-backdrop"
