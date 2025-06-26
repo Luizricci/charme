@@ -241,7 +241,7 @@ export default function Agendamentos() {
     <ConfigProvider locale={ptBR}>
         <div className={styles.container}>
             <h1 className="page-title">
-                {userType === "profissional" ? "Serviços de Hoje" : "Agendamentos"}
+                {userType === "profissional" ? "Serviços Por Vir" : "Agendamentos"}
             </h1>
             {userType !== "profissional" && (
                 <Button type="primary" onClick={() => setIsModalOpen(true)} style={{ marginBottom: 24 }}>
