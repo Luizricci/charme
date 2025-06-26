@@ -1,11 +1,4 @@
-.title {
-    margin-bottom: 28px;
-    margin-top: 2rem;
-    font-size: 1.5rem;
-    color: #22223b;
-    font-weight: 900;
-    letter-spacing: 1px;
-}
+
 .cardsContainer {
     display: flex;
     flex-direction: column;

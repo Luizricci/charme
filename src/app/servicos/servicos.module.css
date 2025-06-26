@@ -1,13 +1,4 @@
 
-.title {
-    margin-bottom: 28px;
-    margin-top: 2rem;
-    font-size: 3rem;
-    color: #22223b;
-    font-weight: 900;
-    letter-spacing: 1px;
-}
-  
   .servicosList {
     max-width: 400px;
     display: grid;

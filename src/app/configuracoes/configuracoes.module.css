@@ -3,16 +3,6 @@
     background-color: #f7f5fb;
     min-height: 100vh;
 }
-
-.title {
-    margin-bottom: 28px;
-    width: 100%;
-    font-size: 1.7rem;
-    color: #22223b;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
 .profileBox {
     display: flex;
     align-items: center;
