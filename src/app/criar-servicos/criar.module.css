@@ -50,10 +50,15 @@
     border: none;
     top: 16px;
     right: 16px;
-    color: #000000;
+    color: #a3a3a3;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.2s;
   }
+  .pencil:hover {
+    color: #22223b;
+    transform: scale(1.15) rotate(-10deg);
+}
+
   
   @media (max-width: 700px) {
     .container {

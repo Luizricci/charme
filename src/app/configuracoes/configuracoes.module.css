@@ -76,7 +76,6 @@
     font-size: 2rem;
     color: #a3a3a3;
     cursor: pointer;
-    margin-left: 24px;
     transition: color 0.2s, transform 0.2s;
     align-self: flex-start;
 }
