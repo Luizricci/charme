@@ -13,42 +13,56 @@
 }
 
 .userCard {
-    min-width: 260px;
-    max-width: 320px;
-    border-radius: 14px !important;
+    min-width: 240px;
+    min-height: 300px;
+    border-radius: 17px !important;
     box-shadow: 0 2px 8px #e6e6e6;
     border: none !important;
-    background: #f7f5fb;
+    background: linear-gradient(135deg, #A971F8, #895CF9);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 32px 16px 24px 16px;
 }
+
 
 .userInfo {
     margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem; 
+    flex: 1;
+    width: 100%;
 }
 
 .userName {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #4a4e69;
+    color: #ffffff;
     margin-bottom: 6px;
 }
 
 .userEmail {
     font-size: 1rem;
-    color: #7c7c7c;
+    color: #ffffff;
 }
 
 .userActions {
+    width: 100%;
     display: flex;
+    justify-content: center;
+    margin-top: 24px;
     gap: 12px;
-    justify-content: flex-end;
+    justify-content: center;
+
 }
 
 .editButton {
-    background: linear-gradient(90deg, #a47be0 60%, #7c3aed 100%);
+    background: #895CF9;
     border: none;
+    min-width: 90%;
     font-weight: 600;
     border-radius: 6px;
     color: #fff;
@@ -56,7 +70,7 @@
 }
 
 .editButton:hover {
-    background: linear-gradient(90deg, #7c3aed 60%, #a47be0 100%);
+    background: #7c4ef1 !important;
     color: #fff;
 }
 
@@ -76,7 +90,7 @@
 
 .userType {
     font-size: 1rem;
-    color: #7c7c7c;
+    color: #ffffff;
 }
 .modalContent {
   display: flex;
