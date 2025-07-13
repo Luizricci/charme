@@ -125,8 +125,7 @@
   border-radius: 16px;
   box-shadow: 0 2px 12px #e6e6e6;
   padding: 32px 24px;
-  min-width: 260px;
-  max-width: 340px;
+  min-width: 360px;
   flex: 1;
   margin: 8px 0;
   text-align: left;
