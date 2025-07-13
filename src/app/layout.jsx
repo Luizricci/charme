@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
   const [loading, setLoading] = useState(true);
   const [siderOpen, setSiderOpen] = useState(false);
 
-  const isLoginOrCreateAccountPage = pathname === '/login' || pathname === '/create-account';
+  const isLoginOrCreateAccountPage = pathname === '/login' || pathname === '/create-account' || pathname === '/home';
 
   useEffect(() => {
     const checkAuth = () => {
